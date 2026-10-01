@@ -57,7 +57,6 @@ async function getValidAccessToken() {
     const tokens = loadTokens();
     return tokens.access_token;
 }
-  return tokens.access_token;
-}
+
 
 module.exports = { loadTokens, saveTokens, refreshAccessToken, getValidAccessToken };
