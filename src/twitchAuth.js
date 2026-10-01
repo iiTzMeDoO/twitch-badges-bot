@@ -8,20 +8,19 @@ const fetch = require("node-fetch");
 const TOKENS_PATH = path.join(__dirname, "..", "tokens.json");
 
 function loadTokens() {
-  if (fs.existsSync(TOKENS_PATH)) {
-    return JSON.parse(fs.readFileSync(TOKENS_PATH, "utf-8"));
-  }
-  // ماكاش tokens.json (طبيعي على منصات زي Render لو ما رفعناه بالمستودع
-  // عمداً لأسباب أمان) — نجرب نبنيه من متغيرات بيئة بدالها. تنسخ القيم
-  // مرة وحدة من tokens.json المحلي لعندك وتحطها كمتغيرات بيئة بلوحة
-  // تحكم المنصة: TWITCH_BOT_ACCESS_TOKEN و TWITCH_BOT_REFRESH_TOKEN
-  const envAccess = process.env.TWITCH_BOT_ACCESS_TOKEN;
-  const envRefresh = process.env.TWITCH_BOT_REFRESH_TOKEN;
-  if (envAccess && envRefresh) {
-    const tokens = { access_token: envAccess, refresh_token: envRefresh, expires_at: 0 };
-    saveTokens(tokens);
-    return tokens;
-  }
+    // استخدام التوكن المباشر المضاف في Railway
+    const accessToken = process.env.TWITCH_BOT_ACCESS_TOKEN || process.env.TWITCH_OAUTH_TOKEN;
+    const refreshToken = process.env.TWITCH_BOT_REFRESH_TOKEN || process.env.TWITCH_OAUTH_TOKEN;
+
+    if (!accessToken) {
+        throw new Error("لم يتم العثور على توكن Twitch في متغيرات البيئة!");
+    }
+
+    return {
+        access_token: accessToken.replace(/^oauth:/, ''),
+        refresh_token: refreshToken ? refreshToken.replace(/^oauth:/, '') : ''
+    };
+}
   throw new Error(
     "ماكاش tokens.json ولا متغيرات TWITCH_BOT_ACCESS_TOKEN/TWITCH_BOT_REFRESH_TOKEN — لازم تشغل الأمر أولاً: npm run get-token"
   );
