@@ -1,0 +1,16 @@
+{
+  "botUsername": "badgecollectorsxx",
+  "siteUrl": "https://badgecollecctorsxx.vercel.app/",
+  "boardUrl": "https://badgecollecctorsxx.vercel.app/board.html",
+  "dataUrl": "https://badgecollecctorsxx.vercel.app/api/discord_bot?action=badges",
+  "channelsApiUrl": "https://badgecollecctorsxx.vercel.app/api/bot_channels",
+  "joinCodeConfirmUrl": "https://badgecollecctorsxx.vercel.app/api/join_callback",
+  "checkIntervalMinutes": 10,
+  "channelPollIntervalMinutes": 6,
+  "broadcastPollIntervalMinutes": 2,
+  "channels": {
+    "badgecollectorsxx": {
+      "newBadgeAlerts": true
+    }
+  }
+}
