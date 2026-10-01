@@ -53,12 +53,10 @@ async function refreshAccessToken(clientId, clientSecret) {
 }
 
 // يرجع access_token صالح للاستخدام — يجدده تلقائياً لو باقيلو أقل من 10 دقايق
-async function getValidAccessToken(clientId, clientSecret) {
-  let tokens = loadTokens();
-  const tenMinutes = 10 * 60 * 1000;
-  if (!tokens.expires_at || Date.now() > tokens.expires_at - tenMinutes) {
-    tokens = await refreshAccessToken(clientId, clientSecret);
-  }
+async function getValidAccessToken() {
+    const tokens = loadTokens();
+    return tokens.access_token;
+}
   return tokens.access_token;
 }
 
