@@ -21,10 +21,7 @@ function loadTokens() {
         refresh_token: refreshToken ? refreshToken.replace(/^oauth:/, '') : ''
     };
 }
-  throw new Error(
-    "ماكاش tokens.json ولا متغيرات TWITCH_BOT_ACCESS_TOKEN/TWITCH_BOT_REFRESH_TOKEN — لازم تشغل الأمر أولاً: npm run get-token"
-  );
-}
+
 
 function saveTokens(tokens) {
   fs.writeFileSync(TOKENS_PATH, JSON.stringify(tokens, null, 2));
